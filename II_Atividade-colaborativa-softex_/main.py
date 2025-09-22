@@ -13,24 +13,25 @@ class VeiculoMotorizado(ABC):
     @abstractmethod
     def acelerar(self):
         pass
-    
     @property
     def velocidade(self):
         return self.__velocidade
     @velocidade.setter
     def velocidade(self, valor):
         if valor >= 30:
-            print("Por favor, verifique se todos estão com os cinto de segurança")
+            print("AVISO: Por favor, verifique se todos estão com os cintos de segurança")
         self.__velocidade = valor
 
     def informacao(self):
         print(f'Motor: {self.motor}')
         print(f"Placa: {self.placa}")
         print(f"Velocidade: {self.velocidade}")
+        
 class Motor:
     def __init__(self, tipo):
         self.tipo = tipo
         self.__ligado = False
+
     
     def ligar(self):
         self.__ligado = True
@@ -51,6 +52,7 @@ class Carro(VeiculoMotorizado):
         super().__init__(motor, placa, velocidade)
         self.marca = marca
         self.modelo = modelo
+
 
     def ligar_motor(self):
         if self.velocidade == 0 and self.motor.get_status() == "Desligado":
@@ -85,7 +87,7 @@ class Carro(VeiculoMotorizado):
     def status(self):
         print(f'Marca: {self.marca}')
         print(f"Modelo: {self.modelo}")
-        if self.motor.ligar == True:
+        if self.motor.get_status() == "Ligado":
             print("Seu carro está ligado")
         else:
             print("Seu carro está desligado")
@@ -97,6 +99,7 @@ class Moto(VeiculoMotorizado):
         super().__init__(motor, placa, velocidade)
         self.marca = marca
         self.modelo = modelo
+
 
     def ligar_motor(self):
         if self.velocidade == 0 and self.motor.get_status() == "Desligado":
@@ -126,8 +129,17 @@ class Moto(VeiculoMotorizado):
     def status(self):
         print(f'Marca: {self.marca}')
         print(f"Modelo: {self.modelo}")
-        if self.motor.ligar == True:
+        if self.motor.get_status() == "Ligado":
             print("Sua moto está ligada")
         else:
             print("Sua moto está desligada")
         self.informacao()
+
+    
+carro1 = Carro('Eletrico', "XBV-5478", 0, "BYD", "Han")
+carro1.ligar_motor()
+carro1.acelerar()
+carro1.informacao()
+carro1.acelerar()
+carro1.frear()
+carro1.informacao()
