@@ -26,11 +26,12 @@ class VeiculoMotorizado(ABC):
         print(f'Motor: {self.motor}')
         print(f"Placa: {self.placa}")
         print(f"Velocidade: {self.velocidade}")
-        
+
 class Motor:
     def __init__(self, tipo):
         self.tipo = tipo
         self.__ligado = False
+
 
     
     def ligar(self):
@@ -136,7 +137,7 @@ class Moto(VeiculoMotorizado):
         self.informacao()
 
     
-carro1 = Carro('Eletrico', "XBV-5478", 0, "BYD", "Han")
+carro1 = Carro()
 carro1.ligar_motor()
 carro1.acelerar()
 carro1.informacao()
