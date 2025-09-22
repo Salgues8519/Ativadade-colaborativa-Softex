@@ -13,7 +13,11 @@ class VeiculoMotorizado(ABC):
     @abstractmethod
     def acelerar(self):
         pass
-
+    
+    def informacao(self):
+        print(f'Motor: {self.motor}')
+        print(f"Placa: {self.placa}")
+        print(f"Velocidade: {self.velocidade}")
 class Motor:
     def __init__(self, tipo):
         self.tipo = tipo
@@ -41,7 +45,7 @@ class Carro(VeiculoMotorizado):
 
     def ligar_motor(self):
         if self.velocidade == 0 and self.motor.get_status() == "Desligado":
-            return self.motor.ligar()
+            self.motor.ligar()
         else:
             return "Carro já está ligado"
     
@@ -64,6 +68,15 @@ class Carro(VeiculoMotorizado):
             self.motor.desligar()
         else:
             print(f"{self.modelo} precisa estar parado e ligado para ser desligado")
+    
+    def status(self):
+        print(f'Marca: {self.marca}')
+        print(f"Modelo: {self.modelo}")
+        if self.motor.ligar == True:
+            print("Seu carro está ligado")
+        else:
+            print("Seu carro está desligado")
+        self.informacao()
 
 
 class Moto(VeiculoMotorizado):
@@ -74,12 +87,13 @@ class Moto(VeiculoMotorizado):
 
     def ligar_motor(self):
         if self.velocidade == 0 and self.motor.get_status() == "Desligado":
-            return self.motor.ligar()
+            self.motor.ligar()
         else:
             return "Moto já está ligado"
     
     def acelerar(self):
         if self.motor.get_status() == "Ligado":
+            self.velocidade += 10
             return f"O {self.modelo} está acelerando"
         else:
             raise Exception("Erro: O motor precisa estar ligado para acelerar.")
@@ -87,7 +101,7 @@ class Moto(VeiculoMotorizado):
     def frear(self):
         if self.velocidade > 0:
             self.velocidade -= 5
-            print("O carro diminuiu em 5km")
+            print("A moto diminuiu em 5km")
         else:
             print(f"A velocidade do {self.modelo} já é zero")
 
@@ -96,3 +110,11 @@ class Moto(VeiculoMotorizado):
             self.motor.desligar()
         else:
             print(f"{self.modelo} precisa estar parado e ligado para ser desligado")
+    def status(self):
+        print(f'Marca: {self.marca}')
+        print(f"Modelo: {self.modelo}")
+        if self.motor.ligar == True:
+            print("Sua moto está ligada")
+        else:
+            print("Sua moto está desligada")
+        self.informacao()
