@@ -14,6 +14,15 @@ class VeiculoMotorizado(ABC):
     def acelerar(self):
         pass
     
+    @property
+    def velocidade(self):
+        return self.__velocidade
+    @velocidade.setter
+    def velocidade(self, valor):
+        if valor >= 30:
+            print("Por favor, verifique se todos estão com os cinto de segurança")
+        self.__velocidade = valor
+
     def informacao(self):
         print(f'Motor: {self.motor}')
         print(f"Placa: {self.placa}")
@@ -48,7 +57,7 @@ class Carro(VeiculoMotorizado):
             self.motor.ligar()
         else:
             return "Carro já está ligado"
-    
+
     def acelerar(self):
         if self.motor.get_status() == "Ligado":
             self.velocidade += 10
@@ -68,6 +77,10 @@ class Carro(VeiculoMotorizado):
             self.motor.desligar()
         else:
             print(f"{self.modelo} precisa estar parado e ligado para ser desligado")
+
+    '''def segurança(self):
+        if self.velocidade >= 30:
+            print("Por favor, verifique se todos estão com os cinto de segurança")'''
     
     def status(self):
         print(f'Marca: {self.marca}')
