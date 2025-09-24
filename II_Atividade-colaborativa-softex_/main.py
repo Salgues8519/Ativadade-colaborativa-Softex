@@ -13,14 +13,7 @@ class VeiculoMotorizado(ABC):
     @abstractmethod
     def acelerar(self):
         pass
-    @property
-    def velocidade(self):
-        return self.__velocidade
-    @velocidade.setter
-    def velocidade(self, valor):
-        if valor >= 30:
-            print("AVISO: Por favor, verifique se todos estão com os cintos de segurança")
-        self.__velocidade = valor
+
 
     def informacao(self):
         print(f'Motor: {self.motor}')
@@ -67,6 +60,14 @@ class Carro(VeiculoMotorizado):
             print(f"O {self.modelo} está acelerando em 10km")
         else:
             raise Exception("Erro: O motor precisa estar ligado para acelerar.")
+    @property
+    def velocidade(self):
+        return self.__velocidade
+    @velocidade.setter
+    def velocidade(self, valor):
+        if valor >= 30:
+            print("AVISO: Por favor, verifique se todos estão com os cintos de segurança")
+        self.__velocidade = valor
     
     def frear(self):
         if self.velocidade > 0:
